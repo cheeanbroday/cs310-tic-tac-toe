@@ -18,11 +18,24 @@ public class TicTacToeView {
         
         /* INSERT YOUR CODE HERE */
 		
-		System.out.println("  012\n");
-		System.out.println("0 " + model.getMark(0,0).toString() + model.getMark(0,1).toString() + model.getMark(0,2).toString());
-		System.out.println("1 " + model.getMark(1,0).toString() + model.getMark(1,1).toString() + model.getMark(1,2).toString());
-		System.out.println("2 " + model.getMark(2,0).toString() + model.getMark(2,1).toString() + model.getMark(2,2).toString());
-
+		
+		String topRow = "  ";
+		for(int i = 0; i < model.getWidth(); i++){
+			topRow += i;
+		}
+		System.out.println(topRow + "\n");
+		
+		String rows = "";
+		for(int i = 0; i < model.getWidth(); i++){
+			rows = rows + i + " ";
+			for(int j = 0; j < model.getWidth(); j++){
+				rows += model.getMark(i, j);
+			}
+			System.out.println(rows);
+			rows = "";
+		}
+		
+		
     }
 
     public void showNextMovePrompt() {
