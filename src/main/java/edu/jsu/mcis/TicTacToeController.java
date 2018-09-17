@@ -35,6 +35,15 @@ public class TicTacToeController {
            error message using view's showInputError() if input is invalid. */
         
         /* INSERT YOUR CODE HERE */
+		
+		int row;
+		int col;
+		row = keyboard.nextInt();
+		col = keyboard.nextInt();
+		
+		if(model.makeMark(row, col)){}
+		else{view.showInputError();}
+		
         
     }
 

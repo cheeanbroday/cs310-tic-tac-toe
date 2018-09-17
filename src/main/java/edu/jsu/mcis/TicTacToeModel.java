@@ -74,10 +74,16 @@ public class TicTacToeModel {
         /* Create grid (width x width) as a 2D Mark array */
 
         /* INSERT YOUR CODE HERE */
+		grid = new Mark[width][width];
 
         /* Initialize grid by filling every square with empty marks */
 
         /* INSERT YOUR CODE HERE */
+		for(int i = 0; i < width; ++i){
+			for(int j = 0; j < width; j++){
+				grid[i][j] = Mark.EMPTY;
+			}
+		}
         
     }
 	
@@ -88,9 +94,23 @@ public class TicTacToeModel {
            empty! */
         
         /* INSERT YOUR CODE HERE */
-
-        return false; /* remove this line! */
-        
+		
+		
+		if(isValidSquare(row, col) && !isSquareMarked(row, col)){
+			if(xTurn == true){
+				grid[row][col] = Mark.X;
+				xTurn = false;
+				return true;
+			}
+			else{
+				grid[row][col] = Mark.O;
+				xTurn = true;
+				return true;
+			}
+		}
+		else{
+			return false;
+		}
     }
 	
     private boolean isValidSquare(int row, int col) {
@@ -98,8 +118,14 @@ public class TicTacToeModel {
         /* Return true if specified location is within grid bounds */
         
         /* INSERT YOUR CODE HERE */
+		
+		if(row < width && col < width){
+			return true;
+		}
+		else{
+			return false;
+		}
 
-        return false; /* remove this line! */
         
     }
 	
@@ -108,9 +134,14 @@ public class TicTacToeModel {
         /* Return true if square at specified location is marked */
         
         /* INSERT YOUR CODE HERE */
-
-        return false; /* remove this line! */
-            
+		
+		if(grid[row][col] != Mark.EMPTY){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
     }
 	
     public Mark getMark(int row, int col) {
@@ -118,8 +149,8 @@ public class TicTacToeModel {
         /* Return mark from the square at the specified location */
         
         /* INSERT YOUR CODE HERE */
-
-        return null; /* remove this line! */
+		
+        return grid[row][col];
             
     }
 	
@@ -130,8 +161,20 @@ public class TicTacToeModel {
            value */
         
         /* INSERT YOUR CODE HERE */
-
-        return null; /* remove this line! */
+		
+		if(isMarkWin(Mark.X) == true){
+			return Result.X;
+		}
+		else if(isMarkWin(Mark.O) == true){
+			return Result.O;
+		}
+		else if(isTie()){
+			return Result.TIE;
+		}
+		else{
+			return Result.NONE;
+		}
+		
 
     }
 	
@@ -141,9 +184,33 @@ public class TicTacToeModel {
            winner */
         
         /* INSERT YOUR CODE HERE */
-
-        return false; /* remove this line! */
-
+		
+		int[] rowCount = new int[width];
+		int[] colCount = new int[width];
+		
+		for(int i = 0; i < width; i++){
+			for(int j = 0; j < width; j++){
+				
+				if(isSquareMarked(i, j)){
+					if(getMark(i, j) == mark){
+						rowCount[j] += 1;
+						colCount[i] += 1;
+					}
+				}
+				
+			}
+		}
+		
+		
+		
+		for(int i = 0; i < width; i++){
+			if(rowCount[i] == width || colCount[i] == width){
+				return true;
+			}
+			
+		}
+		return false;
+		
     }
 	
     private boolean isTie() {
@@ -151,8 +218,23 @@ public class TicTacToeModel {
         /* Check the squares of the board to see if the game is a tie */
 
         /* INSERT YOUR CODE HERE */
-
-        return false; /* remove this line! */
+		
+		boolean fullBoard = true;
+		
+		for(int i = 0; i < width; i++){
+			for(int j = 0; j < width; j++){
+				if(!isSquareMarked(i,j)){
+					fullBoard = false;
+				}
+			}
+		}
+		
+		if(fullBoard == true){
+			return true;
+		}
+		else{
+			return false;
+		}
         
     }
 
