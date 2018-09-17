@@ -119,7 +119,7 @@ public class TicTacToeModel {
         
         /* INSERT YOUR CODE HERE */
 		
-		if(row < width && col < width){
+		if(row < width && col < width && row >= 0 && col >= 0){
 			return true;
 		}
 		else{
@@ -200,15 +200,31 @@ public class TicTacToeModel {
 				
 			}
 		}
-		
-		
-		
+
 		for(int i = 0; i < width; i++){
 			if(rowCount[i] == width || colCount[i] == width){
 				return true;
 			}
 			
 		}
+		
+		boolean diag = true;
+		for(int i = 0; i < width; i++){
+			if(!(grid[i][i] == mark)){
+				diag = false;
+			}
+		}
+		boolean revDiag = true;
+		for(int i = 0; i < width; i++){
+			if(!(grid[width-1-i][i] == mark)){
+				revDiag = false;
+			}
+		}
+		
+		if(diag || revDiag){
+			return true;
+		}
+		
 		return false;
 		
     }
